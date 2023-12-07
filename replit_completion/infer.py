@@ -1,13 +1,13 @@
 import json
 import time
 import torch
-from transformers import T5ForConditionalGeneration, RobertaTokenizer, AutoTokenizer
+from transformers import AutoModelForCausalLM, AutoTokenizer
 device = "cuda" if torch.cuda.is_available() else 'cpu'
 
 model_path = 'replit/replit-code-v1-3b'
 
-tokenizer = RobertaTokenizer.from_pretrained(model_path)
-model = T5ForConditionalGeneration.from_pretrained(model_path).to(device)
+tokenizer = AutoTokenizer.from_pretrained(model_path)
+model = AutoModelForCausalLM.from_pretrained(model_path).to(device)
 
 
 def infer(data):

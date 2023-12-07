@@ -6,7 +6,7 @@ device = "cuda" if torch.cuda.is_available() else 'cpu'
 
 model_path = 'bigcode/starcoder'
 
-tokenizer = RobertaTokenizer.from_pretrained(model_path)
+tokenizer = AutoTokenizer.from_pretrained(model_path)
 model = T5ForConditionalGeneration.from_pretrained(model_path).to(device)
 
 
