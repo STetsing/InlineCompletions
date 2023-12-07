@@ -6,7 +6,7 @@ device = "cuda" if torch.cuda.is_available() else 'cpu'
 
 model_path = 'replit/replit-code-v1-3b'
 
-tokenizer = AutoTokenizer.from_pretrained(model_path)
+tokenizer = AutoTokenizer.from_pretrained(model_path, trust_remote_code=True)
 model = AutoModelForCausalLM.from_pretrained(model_path).to(device)
 
 
