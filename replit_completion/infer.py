@@ -17,6 +17,6 @@ def infer(data):
     temp = data['temperature']
     start = time.time()
     input_ids = tokenizer(context, return_tensors='pt').input_ids
-    outputs = model.generate(input_ids, max_new_tokens=int(mnt), temperature=float(temp))
+    outputs = model.generate(input_ids, max_new_tokens=int(mnt), temperature=float(temp), pad_token_id=tokenizer.eos_token_id)
     generated_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
     return json.dumps(generated_text)
