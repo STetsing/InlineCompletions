@@ -2,13 +2,13 @@ import json
 import time
 import torch
 from datetime import datetime
-from transformers import T5ForConditionalGeneration, RobertaTokenizer, AutoTokenizer
+from transformers import AutoModelForCausalLM, RobertaTokenizer, AutoTokenizer
 device = "cuda" if torch.cuda.is_available() else 'cpu'
 
 model_path = 'bigcode/starcoder'
 
 tokenizer = AutoTokenizer.from_pretrained(model_path, trust_remote_code=True)
-model = T5ForConditionalGeneration.from_pretrained(model_path, trust_remote_code=True).to(device)
+model = AutoModelForCausalLM.from_pretrained(model_path, trust_remote_code=True).to(device)
 
 
 def infer(data):
