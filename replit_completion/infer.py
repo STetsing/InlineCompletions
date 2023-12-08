@@ -12,9 +12,11 @@ model = AutoModelForCausalLM.from_pretrained(model_path, trust_remote_code=True)
 
 def infer(data):
     data = json.loads(data)
-    comment = data['comment']
+    context = data['context']
+    mnt = data['max_new_words']
+    temp = data['temperature']
     start = time.time()
-    input_ids = tokenizer(comment, return_tensors='pt').input_ids
-    outputs = model.generate(input_ids, max_new_tokens=200)
+    input_ids = tokenizer(context, return_tensors='pt').input_ids
+    outputs = model.generate(input_ids, max_new_tokens=int(mnt), temperature=float(temp))
     generated_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
     return json.dumps(generated_text)
