@@ -1,6 +1,7 @@
 import json
 import time
 import torch
+from datetime import datetime
 from transformers import T5ForConditionalGeneration, RobertaTokenizer, AutoTokenizer
 device = "cuda" if torch.cuda.is_available() else 'cpu'
 
@@ -11,6 +12,7 @@ model = T5ForConditionalGeneration.from_pretrained(model_path, trust_remote_code
 
 
 def infer(data):
+    print(datetime.now.strftime("%m/%d/%Y, %H:%M:%S") + 'INFO: Processing new request')
     data = json.loads(data)
     context = data['context']
     mnt = data['max_new_words']
